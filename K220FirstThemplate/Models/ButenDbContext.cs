@@ -6,7 +6,9 @@ namespace K220FirstThemplate.Models
     {
         public DbSet<Section1> Section1s { get; set; }
         public DbSet<Section2> Section2s { get; set; }
-
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public ButenDbContext()
         {
 

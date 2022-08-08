@@ -993,22 +993,22 @@ p {
     border: 1px solid #eff0f1;
     padding: 35px 20px 45px;
     border-radius: 10px;
-    background-color: #fafafa
+    background-color: #fafafa;
+    min-height:500px
 }
 
-.product-single img {
-    max-width: 200px;
-}
+
 
 .product-single h4 {
     font-weight: 800;
     color: #2273f8;
-    margin: 0 0 20px;
+    margin: 20px 0;
+    /*white-space:nowrap;*/
 }
 
 .product-single h2 {
     font-weight: 700;
-    margin: 10px 0 20px;
+    margin: 10px 0;
     font-size: 30px
 }
 

@@ -1,6 +1,7 @@
 ﻿using K220FirstThemplate.Models;
 using K220FirstThemplate.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace K220FirstThemplate.Controllers
@@ -17,11 +18,13 @@ namespace K220FirstThemplate.Controllers
         public IActionResult Index()
         {
             ButenDbContext db = new();
-
-            HomeVM vm = new();
-            vm.Section1 = db.Section1s.First();
-            vm.Section2 = db.Section2s.First();
-
+            HomeVM vm = new()
+            {
+                Section1 = db.Section1s.FirstOrDefault(),
+                Section2 = db.Section2s.FirstOrDefault(),
+                FeatureList = db.Features.ToList(),
+                ListProducts=db.Products.Include(p=>p.Category).ToList()
+            };
             return View(vm);
         }
 

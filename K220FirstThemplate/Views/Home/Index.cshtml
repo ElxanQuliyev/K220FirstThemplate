@@ -4,15 +4,17 @@
 @model HomeVM
 
     <!--start home area-->
-    <section id="home-area" data-scroll-index="0">
+@if (Model.Section1 != null)
+{
+<section id="home-area" data-scroll-index="0">
         <div class="container">
             <div class="row">
                 <!--start caption content-->
                 <div class="col-lg-6 col-md-7">
                     <div class="caption-content d-table">
                         <div class="d-table-cell align-middle">
-                            <h1>@Model.Section1.Header</h1>
-                            <p>@Model.Section1.Description</p>
+                             <h1>@Model.Section1?.Header</h1>
+                            <p>@Model.Section1?.Description</p>
                             <a href="#product-area"><i class="icofont-cart"></i> Order Now</a>
                         </div>
                     </div>
@@ -21,13 +23,14 @@
                 <!--start caption image-->
                 <div class="col-lg-6 col-md-5">
                     <div class="caption-img">
-                        <img src="@Model.Section1.PhotoUrl" class="img-fluid animation-jump" alt="">
+                        <img src="@Model.Section1?.PhotoUrl" class="img-fluid animation-jump" alt="">
                     </div>
                 </div>
                 <!--end caption image-->
             </div>
         </div>
     </section>
+}
     <!--end home area-->
     <!--start about area-->
     <section id="about-area" data-scroll-index="1">
@@ -57,6 +60,7 @@
             </div>
         </div>
     </section>
+    <h1>salam</h1>
     <!--end about area-->
     <!--start feature area-->
     <section id="feature-area" data-scroll-index="2">
@@ -72,60 +76,18 @@
                 <!--end heading-->
             </div>
             <div class="row">
+                @foreach (var feat in Model.FeatureList)
+                {
                 <!--start feature single-->
                 <div class="col-lg-4 col-md-6">
                     <div class="feature-single text-center">
-                        <i class="icofont-layers"></i>
-                        <h4>Attractive Interface</h4>
-                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+                        <i class="@feat.Icon"></i>
+                        <h4>@feat.Title</h4>
+                        <p>@feat.Description</p>
                     </div>
                 </div>
                 <!--end feature single-->
-                <!--start feature single-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-single text-center">
-                        <i class="icofont-alarm"></i>
-                        <h4>Notification Alert</h4>
-                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-                    </div>
-                </div>
-                <!--end feature single-->
-                <!--start feature single-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-single text-center">
-                        <i class="icofont-chart-flow-1"></i>
-                        <h4>GPS Tracking</h4>
-                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-                    </div>
-                </div>
-                <!--end feature single-->
-                <!--start feature single-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-single text-center">
-                        <i class="icofont-chat"></i>
-                        <h4>User Live Chat</h4>
-                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-                    </div>
-                </div>
-                <!--end feature single-->
-                <!--start feature single-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-single text-center">
-                        <i class="icofont-brand-android-robot"></i>
-                        <h4>iOS and Android Apps</h4>
-                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-                    </div>
-                </div>
-                <!--end feature single-->
-                <!--start feature single-->
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-single text-center">
-                        <i class="icofont-lens"></i>
-                        <h4>Latest Technology</h4>
-                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-                    </div>
-                </div>
-                <!--end feature single-->
+                }
             </div>
         </div>
     </section>
@@ -307,46 +269,23 @@
                 <!--end heading-->
             </div>
             <div class="row">
+                @foreach (var pro in Model.ListProducts)
+                {
                 <!--start product single-->
                 <div class="col-lg-3 col-md-6">
                     <div class="product-single text-center">
-                        <h4>Casual</h4>
-                        <img src="assets/images/watch-4.png" class="img-fluid" alt="">
-                        <h2>$199</h2>
+                        <span>@pro.Category.CategoryName</span>
+                        <img style="height:150px;object-fit:contain" src="@pro.PhotoUrl" class="img-fluid" alt="@pro.Name">
+                        <h4>
+                            <a href="/product/details/@pro.Id">@(pro.Name.Length>30?pro.Name.Substring(0,30)+"...":pro.Name)</a>
+                        </h4>
+                        <h2>@pro.Price</h2>
                         <a href="#"><i class="icofont-cart-alt"></i> Buy Now</a>
                     </div>
                 </div>
                 <!--end product single-->
-                <!--start product single-->
-                <div class="col-lg-3 col-md-6">
-                    <div class="product-single text-center">
-                        <h4>Smart</h4>
-                        <img src="assets/images/watch-5.png" class="img-fluid" alt="">
-                        <h2>$279</h2>
-                        <a href="#"><i class="icofont-cart-alt"></i> Buy Now</a>
-                    </div>
-                </div>
-                <!--end product single-->
-                <!--start product single-->
-                <div class="col-lg-3 col-md-6">
-                    <div class="product-single text-center">
-                        <h4>Glorious</h4>
-                        <img src="assets/images/watch-6.png" class="img-fluid" alt="">
-                        <h2>$399</h2>
-                        <a href="#"><i class="icofont-cart-alt"></i> Buy Now</a>
-                    </div>
-                </div>
-                <!--end product single-->
-                <!--start product single-->
-                <div class="col-lg-3 col-md-6">
-                    <div class="product-single text-center">
-                        <h4>Extra</h4>
-                        <img src="assets/images/watch-7.png" class="img-fluid" alt="">
-                        <h2>$220</h2>
-                        <a href="#"><i class="icofont-cart-alt"></i> Buy Now</a>
-                    </div>
-                </div>
-                <!--end product single-->
+
+                }
             </div>
         </div>
     </section>
